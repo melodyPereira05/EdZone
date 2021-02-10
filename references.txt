@@ -1,0 +1,5 @@
+https://docs.djangoproject.com/en/3.0/topics/testing/tools/#fixture-loading
+
+https://docs.djangoproject.com/en/3.0/topics/migrations/#datamigrations
+
+https://docs.djangoproject.com/en/3.0/howto/custom-model-fields/
