@@ -1,0 +1,239 @@
+{%  load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EdZone</title>
+
+
+  {% block css %}
+  {% endblock %}
+  
+</head>
+
+<body>
+    
+
+            
+            <div >
+              <ul>
+                <li
+                
+                {% if '/' == request.path %}
+                class="nav-item active"
+                {% else %}
+                class="nav-item"
+                {% endif %}
+                
+                ><a class="nav-link" href="#"> <i class="fas fa-home"></i> Home</a></li>
+
+                <li 
+
+                {% if 'about' in request.path %}
+                    class="nav-item active"
+                    {% else %}
+                    class="nav-item"
+                    {% endif %}
+                
+                >  <a class="nav-link" href="#"> <i class="fas fa-address-card"></i> About Us</a></li>
+                
+                              <li
+                              {% if 'all-item' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}
+                              
+                              ><a class="nav-link" href="#"> <i class="fas fa-fire-alt"></i> Trending</a></li>
+
+
+                              <li 
+
+                              {% if 'search' in request.path %}
+                                  class="nav-item active"
+                                  {% else %}
+                                  class="nav-item"
+                                  {% endif %}
+                
+                >  <a class="nav-link" href="#"> <i class="fas fa-search"></i> Search </a></li>
+                              <li 
+                              {% if 'post-list' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}
+                              
+                              ><a class="nav-link" href="#"> <i class="fas fa-newspaper"></i> Blog</a></li>
+                             
+                               <li
+                               
+                               {% if 'dashboard' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}
+                               
+                               ><a class="nav-link" href="#"> <i class="fas fa-phone-alt"></i> Dashboard</a></li>
+              </ul>
+  
+              <ul class="nav-shop">
+                <!-- <li class="nav-item"><input type="text"> <button ><i class="ti-search"></i></button></li> -->
+                
+              <li class="nav-item"><button><i class="ti-shopping-cart"> <a href="#"> </i><span class="nav-shop__circle">values</span></a></button> </li>
+              </ul>
+              <ul class="navbar navbar-expand-lg navbar-light" >
+                {% if user.is_authenticated %}
+
+
+                <li 
+                {% if 'dashboard' in request.path %}
+                class="nav-item active"
+                {% else %}
+                class="nav-item"
+                {% endif %}
+                
+                ><a class="nav-link" href=""> <i class="fas fa-user-check"></i>  {{ user.username }}</a></li>
+
+                <li class="nav-item">
+                
+                
+                
+                <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}"> <i class="fas fa-sign-out-alt" ></i> Logout</a>
+                <form action="{% url 'logout' %}" id="logout" method="post" >
+                  {% csrf_token %}
+                  <input type="hidden">
+                </form>
+              </li>
+               
+                {% else %}
+                <li 
+                {% if 'login' in request.path %}
+                class="nav-item active"
+                {% else %}
+                class="nav-item"
+                {% endif %}
+                
+                ><a class="nav-link" href="{% url 'login' %}"> <i  class="fas fa-sign-in-alt"></i> Login</a></li>
+              
+
+             
+                <li 
+                
+                {% if 'register' in request.path %}
+                class="nav-item active"
+                {% else %}
+                class="nav-item"
+                {% endif %}
+                ><a class="nav-link" href="{% url 'register' %}">  Register</a></li>
+
+                {% endif %}
+               
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+      <!--================ End Header Menu Area =================-->
+
+
+
+{% block body %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ================ Blog section end ================= -->  
+
+    <!-- ================ Subscribe section start ================= --> 
+   
+          
+  
+              
+       
+            
+      
+      <!-- ================ Subscribe section end ================= --> 
+  
+      
+  
+    </main>
+  
+  
+   
+  
+  
+    
+
+
+    {% block script %}
+    {% endblock %}
+
+ 
+    
+  
+
+
+    
+
+    <script>
+
+        $(window).stellar({
+            responsive: true,
+            parallaxBackgrounds: true,
+            parallaxElements: true,
+            horizontalScrolling: false,
+            hideDistantElements: false,
+            scrollProperty: 'scroll'
+          });
+        
+    </script>
+
+    
+<script type="text/javascript">
+	let thumbnails = document.getElementsByClassName('thumbnail')
+
+	let activeImages = document.getElementsByClassName('active')
+
+	for (var i=0; i < thumbnails.length; i++){
+
+		thumbnails[i].addEventListener('mouseover', function(){
+			console.log(activeImages)
+			
+			if (activeImages.length > 0){
+				activeImages[0].classList.remove('active')
+			}
+			
+
+			this.classList.add('active')
+			document.getElementById('featured').src = this.src
+		})
+	}
+
+
+	let buttonRight = document.getElementById('slideRight');
+	let buttonLeft = document.getElementById('slideLeft');
+
+	buttonLeft.addEventListener('click', function(){
+		document.getElementById('slider').scrollLeft -= 180
+	})
+
+	buttonRight.addEventListener('click', function(){
+		document.getElementById('slider').scrollLeft += 180
+	})
+
+
+</script>
+  </body>
+  </html>

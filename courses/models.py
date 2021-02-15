@@ -9,19 +9,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 # Create your models here.
 
-# #this all will be for courses
-# class Instructor(models.Model):
-    
-#     instructor= models.ForeignKey(User, related_name='course_instructor', on_delete=models.CASCADE)
-#     #instructor=models.CharField(max_length=100)
-#     instructor_photo=models.ImageField(upload_to='photos/seller/%Y/%m/%d/')
-#     contact_no =models.CharField(max_length=200)
-#     email=models.CharField(max_length=200)
-#     # def get_absolute_url(self):
-#     #     return reverse('course:instructor-page',args=[self.id])
-    
-#     def __str__(self):
-#         return self.name
+
 
 class Subject(models.Model):
         
@@ -36,7 +24,6 @@ class Subject(models.Model):
     
 
 class Course(models.Model):
-    #instructor= models.ForeignKey(Instructor, related_name='course_instructor', on_delete=models.CASCADE) 
     instructor= models.ForeignKey(User, related_name='courses_created', on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, related_name='courses', on_delete=models.CASCADE) 
     students = models.ManyToManyField(User, related_name='courses_joined', blank=True)

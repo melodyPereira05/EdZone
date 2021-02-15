@@ -53,14 +53,17 @@ def login(request):
    
     else:
         return render(request,'login.html')
+    
+
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         messages.add_message(request, messages.SUCCESS, 'You have been logged out successfullt')
-        return redirect('home-page')
+        return redirect('login')
         
         
-    return redirect('home-page')
+    return redirect('login')
+
 #shows all the courses taken by a student
 def dashboard(request):
     contact_dashboard=Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)  
@@ -70,6 +73,8 @@ def dashboard(request):
       
     }
     return render(request,'dashboard.html',context)
+
+
 # all the courses a student has enrolled for
 def wishlist(request):
     contact_wishlist=Wishlist.objects.order_by('-Wishlisted_date').filter(user_id=request.user.id)  
