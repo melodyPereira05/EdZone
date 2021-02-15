@@ -45,6 +45,10 @@ class Module(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     order = OrderField(blank=True,default='', for_fields=['course'])
+    content =models.TextField( blank=True )
+    file = models.FileField(upload_to='files',blank=True)
+    image = models.FileField(upload_to='images',blank=True)
+    url = models.URLField(blank=True)
     
     class Meta:
         ordering = ['order']
@@ -81,18 +85,14 @@ class ItemBase(models.Model):
         
     def __str__(self):
         return self.title
+
     
-class Text(ItemBase):
-    content = models.TextField()
+
     
-class File(ItemBase):
-    file = models.FileField(upload_to='files')
-    
-class Image(ItemBase):
-        file = models.FileField(upload_to='images')
+
         
-class Video(ItemBase):
-        url = models.URLField()
+
+        
 
 class Wishlist(models.Model):
     course=models.CharField(max_length=1000)
